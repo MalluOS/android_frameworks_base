@@ -298,6 +298,9 @@ public class StatusBar extends SystemUI implements DemoMode,
     private static final String GAMING_MODE_HEADSUP_TOGGLE =
             "system:" + Settings.System.GAMING_MODE_HEADSUP_TOGGLE;
 
+    private static final String QS_TILE_TITLE_VISIBILITY =
+            "system:" + Settings.System.QS_TILE_TITLE_VISIBILITY;
+
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
     private static final String BANNER_ACTION_SETUP =
@@ -748,6 +751,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         tunerService.addTunable(this, LOCKSCREEN_CHARGING_ANIMATION_STYLE);
         tunerService.addTunable(this, GAMING_MODE_ACTIVE);
         tunerService.addTunable(this, GAMING_MODE_HEADSUP_TOGGLE);
+        tunerService.addTunable(this, QS_TILE_TITLE_VISIBILITY);
 
         mDisplayManager = mContext.getSystemService(DisplayManager.class);
 
@@ -4960,6 +4964,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         } else if (GAMING_MODE_HEADSUP_TOGGLE.equals(key)) {
             mHeadsUpDisabled = TunerService.parseIntegerSwitch(newValue, true);
             mNotificationInterruptionStateProvider.setGamingPeekMode(mGamingModeActivated && mHeadsUpDisabled);
+        } else if (QS_TILE_TITLE_VISIBILITY.equals(key)) {
+            if (mQSPanel != null) {
+            mQSPanel.updateResources();
+            }
         }
     }
     // End Extra BaseStatusBarMethods.

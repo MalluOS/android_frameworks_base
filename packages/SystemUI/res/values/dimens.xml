@@ -1169,4 +1169,7 @@
     <dimen name="screenrecord_dialog_padding">18dp</dimen>
     <dimen name="screenrecord_logo_size">24dp</dimen>
 
+    <!-- QS tile text visibility -->
+    <dimen name="qs_tile_height_wo_label">64dp</dimen>
+
 </resources>
