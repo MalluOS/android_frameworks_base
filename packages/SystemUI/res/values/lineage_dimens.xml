@@ -26,4 +26,10 @@
     <dimen name="keyguard_charging_indication_height">48dp</dimen>
     <dimen name="keyguard_charging_indication_width">35dp</dimen>
 
+    <!-- Custom header -->
+    <dimen name="qs_header_image_offset">25dp</dimen>
+    <dimen name="qs_header_image_side_margin">4dp</dimen>
+    <dimen name="qs_header_image_top_margin">4dp</dimen>
+    <dimen name="qs_header_image_bottom_margin">4dp</dimen>
+
 </resources>
