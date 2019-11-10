@@ -46,6 +46,7 @@ LOCAL_REQUIRED_MODULES := \
 	FontNotoSerifSourceOverlay \
 	FontGrandHotelSourceOverlay \
 	FontRedressedSourceOverlay \
+	FontGoogleSansOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
