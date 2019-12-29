@@ -1627,21 +1627,6 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (isActive) {
             row.slider.requestFocus();
         }
-        boolean useActiveColoring = isActive && row.slider.isEnabled();
-        final ColorStateList tint = useActiveColoring
-                ? Utils.getColorAccent(mContext).withAlpha(mDarkMode ?
-                        SLIDER_PROGRESS_ALPHA_ACTIVE_DARK : SLIDER_PROGRESS_ALPHA_ACTIVE)
-                : Utils.getColorAccent(mContext).withAlpha(mDarkMode ?
-                        SLIDER_PROGRESS_ALPHA_DARK : SLIDER_PROGRESS_ALPHA);
-        final int alpha = useActiveColoring
-                ? Color.alpha(tint.getDefaultColor())
-                : getAlphaAttr(android.R.attr.secondaryContentAlpha);
-        if (tint == row.cachedTint) return;
-        row.slider.setProgressTintList(tint);
-        row.slider.setThumbTintList(tint);
-        row.slider.setProgressBackgroundTintList(tint);
-        row.slider.setAlpha(((float) alpha) / 255);
-        row.cachedTint = tint;
     }
 
     private void updateVolumeRowSliderH(VolumeRow row, boolean enable, int vlevel) {
