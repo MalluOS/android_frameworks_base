@@ -101,10 +101,11 @@ public class MobileSignalController extends SignalController<
 
     private ImsManager mImsManager;
     private ImsManager.Connector mImsManagerConnector;
-    private boolean mShowVolteIcon;
+    private int mShowVolteIcon = 0;
     private boolean mShow4gForLte;
 
-    private static final String SHOW_VOLTE_ICON = "show_volte_icon";
+     public static final String VOLTE_ICON_STYLE =
+            "system:" + Settings.System.VOLTE_ICON_STYLE;
     private static final String SHOW_FOURG_ICON =
             "system:" + Settings.System.SHOW_FOURG_ICON;
 
@@ -163,7 +164,7 @@ public class MobileSignalController extends SignalController<
             }
         };
 
-        Dependency.get(TunerService.class).addTunable(this, SHOW_VOLTE_ICON);
+        Dependency.get(TunerService.class).addTunable(this, VOLTE_ICON_STYLE);
         Dependency.get(TunerService.class).addTunable(this, SHOW_FOURG_ICON);
         mDisplayGraceHandler = new Handler(receiverLooper) {
 
@@ -180,8 +181,8 @@ public class MobileSignalController extends SignalController<
     @Override
     public void onTuningChanged(String key, String newValue) {
         switch (key) {
-            case SHOW_VOLTE_ICON:
-                mShowVolteIcon = TunerService.parseIntegerSwitch(newValue, false);
+            case VOLTE_ICON_STYLE:
+                mShowVolteIcon = TunerService.parseInteger(newValue, 0);
                 Log.d(mTag, "mShowVolteIcon=" + mShowVolteIcon);
                 notifyListeners();
                 break;
@@ -369,7 +370,7 @@ public class MobileSignalController extends SignalController<
     }
 
     private boolean isVolteSwitchOn() {
-        return mImsManager != null && mImsManager.isEnhanced4gLteModeSettingEnabledByUser();
+        return mImsManager != null && mShowVolteIcon > 0;
     }
 
     private int getVolteResId() {
@@ -377,7 +378,28 @@ public class MobileSignalController extends SignalController<
         int voiceNetTye = getVoiceNetworkType();
         if ((mCurrentState.voiceCapable || mCurrentState.videoCapable)
                 &&  mCurrentState.imsRegistered) {
-            resId = R.drawable.ic_volte;
+            switch (mShowVolteIcon) {
+                case 1:
+                    resId = R.drawable.ic_volte1;
+                    break;
+                case 2:
+                    resId = R.drawable.ic_volte2;
+                    break;
+                case 3:
+                    resId = R.drawable.ic_volte3;
+                    break;
+                case 4:
+                    resId = R.drawable.ic_volte4;
+                    break;
+                case 5:
+                    resId = R.drawable.ic_volte5;
+                    break;
+                case 6:
+                    resId = R.drawable.ic_volte6;
+                    break;
+                default:
+                    break;
+            }
         } else if ((mDataNetType == TelephonyManager.NETWORK_TYPE_LTE
                 || mDataNetType == TelephonyManager.NETWORK_TYPE_LTE_CA)
                 && voiceNetTye  == TelephonyManager.NETWORK_TYPE_UNKNOWN) {
@@ -476,8 +498,7 @@ public class MobileSignalController extends SignalController<
                 && mCurrentState.activityOut;
         showDataIcon &= mCurrentState.isDefault || dataDisabled;
         int typeIcon = (showDataIcon || mConfig.alwaysShowDataRatIcon) ? icons.mDataType : 0;
-        int volteIcon = (mShowVolteIcon && mConfig.showVolteIcon
-                && isVolteSwitchOn()) ? getVolteResId() : 0;
+        int volteIcon = isVolteSwitchOn() ? getVolteResId() : 0;
         callback.setMobileDataIndicators(statusIcon, qsIcon, typeIcon, qsTypeIcon,
                 activityIn, activityOut, volteIcon, dataContentDescription,
                 dataContentDescriptionHtml, description, icons.mIsWide,

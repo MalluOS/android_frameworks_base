@@ -84,11 +84,6 @@
         android:key="location"
         android:title="@string/status_bar_location" />
 
-    <com.android.systemui.tuner.TunerSwitch
-        android:key="show_volte_icon"
-        android:title="@string/status_bar_volte"
-        sysui:defValue="true" />
-
     <!-- other weird signal stuff -->
 
     <com.android.systemui.tuner.StatusBarSwitch
