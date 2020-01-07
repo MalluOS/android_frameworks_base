@@ -2496,4 +2496,9 @@
     <!-- Notification content text when switching to a default launcher that supports gesture navigation [CHAR LIMIT=NONE] -->
     <string name="notification_content_gesture_nav_available">Go to Settings to update system navigation</string>
 
+    <!-- Samsung clock -->
+    <string name="clock_title_default_bold" translatable="false">Default (bold)</string>
+    <string name="clock_title_samsung" translatable="false">Samsung</string>
+    <string name="clock_title_samsung_bold" translatable="false">Samsung (bold)</string>
+
 </resources>
