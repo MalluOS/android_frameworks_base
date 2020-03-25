@@ -620,6 +620,9 @@ public class DisplayPolicy {
             mHasStatusBar = true;
             mHasNavigationBar = mContext.getResources().getBoolean(R.bool.config_showNavigationBar);
 
+            // Register content observer only for main display
+            mSettingsObserver = new SettingsObserver(mHandler);
+
             // Allow a system property to override this. Used by the emulator.
             // See also hasNavigationBar().
             String navBarOverride = SystemProperties.get("qemu.hw.mainkeys");
