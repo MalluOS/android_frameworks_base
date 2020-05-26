@@ -47,8 +47,6 @@
             android:minWidth="@dimen/volume_dialog_panel_width"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_gravity="right"
             android:orientation="vertical"
             android:translationZ="@dimen/volume_dialog_elevation"
             android:clipChildren="false"
@@ -82,8 +80,6 @@
                 android:id="@+id/ringer"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/volume_dialog_ringer_height"
-                android:gravity="right"
-                android:layout_gravity="right"
                 android:layout_margin="@dimen/volume_dialog_ringer_spacing"
                 android:background="@drawable/volume_dialog_ringer_bcg">
 
@@ -111,12 +107,10 @@
                 android:layout_height="@dimen/volume_dialog_tap_target_size">
                 <com.android.keyguard.AlphaOptimizedImageButton
                     android:id="@+id/media_output"
-                    android:src="@drawable/ic_bluetooth_audio"
+                    android:src="@drawable/ic_tune_black_16dp"
                     android:layout_width="@dimen/volume_dialog_tap_target_size"
                     android:layout_height="@dimen/volume_dialog_tap_target_size"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="right"
+                    android:layout_gravity="center"
                     android:contentDescription="@string/accessibility_volume_settings"
                     android:background="@drawable/ripple_drawable_20dp"
                     android:tint="?android:attr/textColorSecondary"
@@ -131,15 +125,12 @@
                     android:id="@+id/expandable_indicator"
                     android:layout_width="@dimen/volume_dialog_tap_target_size"
                     android:layout_height="@dimen/volume_dialog_tap_target_size"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_gravity="right"
+                    android:layout_gravity="center"
                     android:contentDescription="@string/accessibility_volume_expand"
                     android:background="@drawable/ripple_drawable_20dp"
                     android:tint="?android:attr/textColorSecondary"
                     android:soundEffectsEnabled="false"
-                    android:padding="14dp"
-                    android:rotation="90" />
+                    android:padding="14dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -148,8 +139,6 @@
             android:layout_width="@dimen/volume_dialog_caption_size"
             android:layout_height="@dimen/volume_dialog_caption_size"
             android:layout_marginTop="@dimen/volume_dialog_spacer"
-            android:gravity="right"
-            android:layout_gravity="right"
             android:clipToPadding="false"
             android:translationZ="@dimen/volume_dialog_elevation"
             android:background="@drawable/rounded_bg_full">
