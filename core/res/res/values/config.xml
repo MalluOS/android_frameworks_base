@@ -4290,4 +4290,8 @@
 
     <!-- pdp data retry for cause 29, 33 and 55-->
     <bool name="config_pdp_retry_for_29_33_55_enabled">false</bool>
+
+    <!-- Vowifi -->
+    <bool name="config_hasVowifi">false</bool>
+        
 </resources>
