@@ -112,6 +112,10 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeRoundedRectOverlay \
 	IconShapeSquircleOverlay \
 	IconShapeTeardropOverlay \
+	NavigationBarModeGesturalOverlayNoPill \
+	NavigationBarModeGesturalOverlayNoPillNarrowBack \
+	NavigationBarModeGesturalOverlayNoPillWideBack \
+	NavigationBarModeGesturalOverlayNoPillExtraWideBack \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
