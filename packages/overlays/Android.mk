@@ -40,6 +40,8 @@ LOCAL_REQUIRED_MODULES := \
 	AccentColorCyanoBladeOverlay \
 	AccentColorICFBlueOverlay \
 	AccentColorLemonGrassOverlay \
+	AccentColorGuruvayurPappadamOverlay \
+	AccentColorVadakaraMurukkuOverlay \
 	DisplayCutoutEmulationCornerOverlay \
 	DisplayCutoutEmulationDoubleOverlay \
 	DisplayCutoutEmulationTallOverlay \
