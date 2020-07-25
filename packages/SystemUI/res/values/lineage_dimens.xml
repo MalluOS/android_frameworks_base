@@ -26,4 +26,6 @@
     <dimen name="keyguard_charging_indication_height">48dp</dimen>
     <dimen name="keyguard_charging_indication_width">35dp</dimen>
 
+    <dimen name="custom_volume_dialog_seekbar_width">40dip</dimen>
+
 </resources>

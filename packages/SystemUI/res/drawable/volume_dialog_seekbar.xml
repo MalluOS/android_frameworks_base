@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp"/>
+            <size android:height="@dimen/custom_volume_dialog_seekbar_width" />
+            <solid android:color="@color/volume_background_tint" />
+        </shape>
+    </item>
     <item android:id="@android:id/progress">
-        <clip
-            android:clipOrientation="horizontal"
-            android:gravity="left">
+    <clip android:clipOrientation="horizontal" android:gravity="left">
             <selector>
-                <item
-                    android:drawable="@android:color/transparent"
-                    android:state_enabled="false" />
+                <item android:state_enabled="false"
+                    android:drawable="@android:color/transparent" />
                 <item>
-                    <shape android:shape="rectangle">
-                        <corners android:radius="?android:attr/dialogCornerRadius" />
-                        <size android:height="@dimen/volume_dialog_panel_width" />
-                        <gradient 
-                           android:startColor="@*android:color/gradient_start"
-                           android:endColor="@*android:color/gradient_end"
-                           android:angle="45"/>
+                    <shape android:shape="rectangle"
+                        android:tint="?android:attr/colorAccent">
+                        <corners android:radius="20dp"/>
+                        <size android:height="@dimen/custom_volume_dialog_seekbar_width" />
+                        <solid android:color="?android:attr/colorAccent" />
                     </shape>
                 </item>
             </selector>
-        </clip>
+    </clip>
     </item>
 </layer-list>
