@@ -457,6 +457,9 @@ public class MobileSignalController extends SignalController<
                 case 9:
                     resId = R.drawable.ic_volte9; //Oneplus Compact
                     break;
+                case 10:
+                    resId = R.drawable.ic_volte10;
+                    break;
                 default:
                     break;
             }
