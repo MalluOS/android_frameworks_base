@@ -298,6 +298,15 @@ public class StatusBar extends SystemUI implements DemoMode,
     private static final String GAMING_MODE_HEADSUP_TOGGLE =
             "system:" + Settings.System.GAMING_MODE_HEADSUP_TOGGLE;
 
+    private static final String QS_ROWS_PORTRAIT =
+            "system:" + Settings.System.QS_ROWS_PORTRAIT;
+    private static final String QS_ROWS_LANDSCAPE =
+            "system:" + Settings.System.QS_ROWS_LANDSCAPE;
+    private static final String QS_COLUMNS_PORTRAIT =
+            "system:" + Settings.System.QS_COLUMNS_PORTRAIT;
+    private static final String QS_COLUMNS_LANDSCAPE =
+            "system:" + Settings.System.QS_COLUMNS_LANDSCAPE;
+
     private static final String QS_TILE_TITLE_VISIBILITY =
             "system:" + Settings.System.QS_TILE_TITLE_VISIBILITY;
 
@@ -752,6 +761,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         tunerService.addTunable(this, GAMING_MODE_ACTIVE);
         tunerService.addTunable(this, GAMING_MODE_HEADSUP_TOGGLE);
         tunerService.addTunable(this, QS_TILE_TITLE_VISIBILITY);
+        tunerService.addTunable(this, QS_ROWS_PORTRAIT);
+        tunerService.addTunable(this, QS_ROWS_LANDSCAPE);
+        tunerService.addTunable(this, QS_COLUMNS_PORTRAIT);
+        tunerService.addTunable(this, QS_COLUMNS_LANDSCAPE);
 
         mDisplayManager = mContext.getSystemService(DisplayManager.class);
 
@@ -4967,6 +4980,11 @@ public class StatusBar extends SystemUI implements DemoMode,
         } else if (QS_TILE_TITLE_VISIBILITY.equals(key)) {
             if (mQSPanel != null) {
             mQSPanel.updateResources();
+            }
+        } else if ((QS_ROWS_PORTRAIT.equals(key))||(QS_ROWS_LANDSCAPE.equals(key))||
+                  (QS_COLUMNS_PORTRAIT.equals(key))||(QS_COLUMNS_LANDSCAPE.equals(key))) {
+            if (mQSPanel != null) {
+                mQSPanel.updateResources();
             }
         }
     }
