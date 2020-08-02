@@ -224,8 +224,4 @@
 
     <!-- Resolver/Chooser -->
     <color name="resolver_text_color_secondary_dark">#ffC4C6C6</color>
-
-    <!-- Gradient Shit -->
-    <color name="gradient_start">#ff1a73e8</color>
-    <color name="gradient_end">#ff1a73e8</color>
 </resources>
