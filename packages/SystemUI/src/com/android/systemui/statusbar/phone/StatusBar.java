@@ -76,12 +76,15 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.hardware.display.DisplayManager;
 import android.media.AudioAttributes;
 import android.metrics.LogMaker;
@@ -126,6 +129,10 @@ import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityManager;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.DateTimeView;
+import android.widget.FrameLayout;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.colorextraction.ColorExtractor;
@@ -158,6 +165,7 @@ import com.android.systemui.bubbles.BubbleController;
 import com.android.systemui.charging.WirelessChargingAnimation;
 import com.android.systemui.classifier.FalsingLog;
 import com.android.systemui.colorextraction.SysuiColorExtractor;
+import com.android.systemui.malluos.ImageUtilities;
 import com.android.systemui.doze.DozeHost;
 import com.android.systemui.doze.DozeLog;
 import com.android.systemui.doze.DozeReceiver;
@@ -309,6 +317,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private static final String QS_TILE_TITLE_VISIBILITY =
             "system:" + Settings.System.QS_TILE_TITLE_VISIBILITY;
+    private static final String QS_BACKGROUND_BLUR =
+            "system:" + Settings.System.QS_BACKGROUND_BLUR;
 
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
@@ -498,6 +508,11 @@ public class StatusBar extends SystemUI implements DemoMode,
     private int mChargingAnimation = 1;
 
     private boolean mHeadsUpDisabled, mGamingModeActivated;
+
+    private ImageView mQSBlurView;
+    private boolean mQSBlurEnabled;
+    private boolean mQSBlurred;
+
 
     // XXX: gesture research
     private final GestureRecorder mGestureRec = DEBUG_GESTURES
@@ -765,7 +780,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         tunerService.addTunable(this, QS_ROWS_LANDSCAPE);
         tunerService.addTunable(this, QS_COLUMNS_PORTRAIT);
         tunerService.addTunable(this, QS_COLUMNS_LANDSCAPE);
-
+        tunerService.addTunable(this, QS_BACKGROUND_BLUR);
         mDisplayManager = mContext.getSystemService(DisplayManager.class);
 
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -924,6 +939,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         mNotificationPanel = mStatusBarWindow.findViewById(R.id.notification_panel);
         mStackScroller = mStatusBarWindow.findViewById(R.id.notification_stack_scroller);
         mZenController.addCallback(this);
+        mQSBlurView = mStatusBarWindow.findViewById(R.id.qs_blur);
         NotificationListContainer notifListContainer = (NotificationListContainer) mStackScroller;
         mNotificationLogger.setUpWithContainer(notifListContainer);
 
@@ -3370,6 +3386,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     public void showKeyguardImpl() {
         mIsKeyguard = true;
+        updateBlurVisibility();
         if (mKeyguardMonitor != null && mKeyguardMonitor.isLaunchTransitionFadingAway()) {
             mNotificationPanel.animate().cancel();
             onLaunchTransitionFadingEnded();
@@ -4943,6 +4960,27 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
+    public void updateBlurVisibility() {
+        if (!mQSBlurEnabled) return;
+
+        int QSBlurAlpha = Math.round(255.0f * mNotificationPanel.getExpandedFraction());
+
+        if (QSBlurAlpha > 0 && !mIsKeyguard) {
+            if (!mQSBlurred) {
+                mQSBlurred = true;
+                Bitmap bittemp = ImageUtilities.blurImage(mContext, ImageUtilities.screenshotSurface(mContext));
+                Drawable qsBlurBackground = new BitmapDrawable(mContext.getResources(), bittemp);
+                mQSBlurView.setVisibility(View.VISIBLE);
+                mQSBlurView.setBackgroundDrawable(qsBlurBackground);
+            }
+            mQSBlurView.setAlpha(QSBlurAlpha);
+            mQSBlurView.getBackground().setAlpha(QSBlurAlpha);
+        } else if (QSBlurAlpha == 0 || mIsKeyguard) {
+            mQSBlurView.setVisibility(View.GONE);
+            mQSBlurred = false;
+        }
+    }
+
     @Override
     public void onTuningChanged(String key, String newValue) {
         if (SCREEN_BRIGHTNESS_MODE.equals(key)) {
@@ -4985,6 +5023,13 @@ public class StatusBar extends SystemUI implements DemoMode,
                   (QS_COLUMNS_PORTRAIT.equals(key))||(QS_COLUMNS_LANDSCAPE.equals(key))) {
             if (mQSPanel != null) {
                 mQSPanel.updateResources();
+            }
+        } else if ((QS_BACKGROUND_BLUR.equals(key))){
+            mQSBlurEnabled = TunerService.parseIntegerSwitch(newValue, false);
+            if (!mQSBlurEnabled) {
+                mQSBlurView.setVisibility(View.GONE);
+            } else {
+                updateBlurVisibility();
             }
         }
     }
