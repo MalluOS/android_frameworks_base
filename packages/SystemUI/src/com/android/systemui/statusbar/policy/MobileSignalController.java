@@ -411,6 +411,9 @@ public class MobileSignalController extends SignalController<
                     case 5:
                         resId = R.drawable.ic_vowifi_emui;
                         break;
+                    case 6:
+                        resId = R.drawable.ic_vowifi_karikku;
+                        break;
                     default:
                         break;
                 }
@@ -906,6 +909,9 @@ public class MobileSignalController extends SignalController<
                 // EMUI (Huawei P10)
                 case 5:
                     return TelephonyIcons.VOWIFI_EMUI;
+                // Karikku
+                case 6:
+                    return TelephonyIcons.VOWIFI_KARIKKU;
             }
         } else {
             return null;
