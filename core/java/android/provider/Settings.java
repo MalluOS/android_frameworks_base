@@ -4725,7 +4725,47 @@ public final class Settings {
          * @hide
          */
         public static final String AUTO_BRIGHTNESS_MIN_VALUE = "auto_brightness_min_value";
+        /**
+        * Statusbar MalluOS logo
+        * @hide
+        */
+       public static final String STATUS_BAR_LOGO = "status_bar_logo";
 
+       /** @hide */
+       private static final Validator STATUS_BAR_LOGO_VALIDATOR =
+               BOOLEAN_VALIDATOR;
+
+       /**
+        * Statusbar MalluOS logo color setting
+        * @hide
+        */
+       public static final String STATUS_BAR_LOGO_COLOR = "status_bar_logo_color";
+
+       /** @hide */
+       private static final Validator STATUS_BAR_LOGO_COLOR_VALIDATOR =
+               ANY_STRING_VALIDATOR;
+
+       /**
+        * Position of Status bar MalluOS logo
+        * 0 - Left (default)
+        * 1 - Right
+        * @hide
+        */
+       public static final String STATUS_BAR_LOGO_POSITION = "status_bar_logo_position";
+
+       /** @hide */
+       private static final Validator STATUS_BAR_LOGO_POSITION_VALIDATOR =
+             ANY_STRING_VALIDATOR;
+
+       /**
+        * Statusbar MalluOS logo custom style
+        * @hide
+        */
+       public static final String STATUS_BAR_LOGO_STYLE = "status_bar_logo_style";
+
+       /** @hide */
+       private static final Validator STATUS_BAR_LOGO_STYLE_VALIDATOR =
+             ANY_STRING_VALIDATOR;
         /**
          * Enable\Disable Bluetooth Battery bar in quick settings
          * @hide
@@ -4801,6 +4841,10 @@ public final class Settings {
             CHARGING_ANIMATION,
             LOCKSCREEN_BATTERY_INFO,
             NAVIGATION_HANDLE_WIDTH,
+            STATUS_BAR_LOGO,
+            STATUS_BAR_LOGO_COLOR,
+            STATUS_BAR_LOGO_POSITION,
+            STATUS_BAR_LOGO_STYLE,
         };
 
         /**
@@ -4925,6 +4969,10 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCKSCREEN_BATTERY_INFO);
             PRIVATE_SETTINGS.add(BRIGHTNESS_SLIDER_QS_UNEXPANDED);
             PRIVATE_SETTINGS.add(NAVIGATION_HANDLE_WIDTH);
+            PRIVATE_SETTINGS.add(STATUS_BAR_LOGO);
+            PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_COLOR);
+            PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_POSITION);
+            PRIVATE_SETTINGS.add(STATUS_BAR_LOGO_STYLE);
         }
 
         /**
@@ -5025,6 +5073,10 @@ public final class Settings {
             VALIDATORS.put(LOCKSCREEN_BATTERY_INFO, LOCKSCREEN_BATTERY_INFO_VALIDATOR);
             VALIDATORS.put(BRIGHTNESS_SLIDER_QS_UNEXPANDED, BRIGHTNESS_SLIDER_QS_UNEXPANDED_VALIDATOR);
             VALIDATORS.put(NAVIGATION_HANDLE_WIDTH, NAVIGATION_HANDLE_WIDTH_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_LOGO, STATUS_BAR_LOGO_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_LOGO_COLOR, STATUS_BAR_LOGO_COLOR_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_LOGO_POSITION, STATUS_BAR_LOGO_POSITION_VALIDATOR);
+            VALIDATORS.put(STATUS_BAR_LOGO_STYLE, STATUS_BAR_LOGO_STYLE_VALIDATOR);
         }
 
         /**
