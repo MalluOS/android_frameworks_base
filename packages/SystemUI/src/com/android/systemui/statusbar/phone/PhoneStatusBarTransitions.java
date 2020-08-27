@@ -32,6 +32,7 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
     private final float mIconAlphaWhenOpaque;
 
     private View mLeftSide, mStatusIcons, mNetworkTraffic, mBattery;
+    private View mMalluOSLogo, mMalluOSLogoRight;
     private Animator mCurrentAnimation;
 
     /**
@@ -45,6 +46,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
         mStatusIcons = statusBarView.findViewById(R.id.statusIcons);
         mNetworkTraffic = statusBarView.findViewById(R.id.network_traffic);
         mBattery = statusBarView.findViewById(R.id.battery);
+        mMalluOSLogo = statusBarView.findViewById(R.id.malluos_logo);
+        mMalluOSLogoRight = statusBarView.findViewById(R.id.malluos_logo_right);
         applyModeBackground(-1, getMode(), false /*animate*/);
         applyMode(getMode(), false /*animate*/);
     }
@@ -88,7 +91,9 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
                     animateTransitionTo(mLeftSide, newAlpha),
                     animateTransitionTo(mStatusIcons, newAlpha),
                     animateTransitionTo(mNetworkTraffic, newAlpha),
-                    animateTransitionTo(mBattery, newAlphaBC)
+                    animateTransitionTo(mBattery, newAlphaBC),
+                    animateTransitionTo(mMalluOSLogo, newAlpha),
+                    animateTransitionTo(mMalluOSLogoRight, newAlpha)
                     );
             if (isLightsOut(mode)) {
                 anims.setDuration(LIGHTS_OUT_DURATION);
@@ -100,6 +105,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             mStatusIcons.setAlpha(newAlpha);
             mNetworkTraffic.setAlpha(newAlpha);
             mBattery.setAlpha(newAlphaBC);
+            mMalluOSLogo.setAlpha(newAlpha);
+            mMalluOSLogoRight.setAlpha(newAlpha);
         }
     }
 }
