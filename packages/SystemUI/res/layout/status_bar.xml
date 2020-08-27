@@ -65,6 +65,15 @@
                 android:layout_width="match_parent"
                 android:clipChildren="false"
             >
+
+                <com.android.systemui.malluos.logo.LogoImageView
+                    android:id="@+id/malluos_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="1dip"
+                    android:scaleType="center"
+                    android:visibility="gone" />
+
                 <ViewStub
                     android:id="@+id/operator_name"
                     android:layout_width="wrap_content"
@@ -81,14 +90,6 @@
                     android:paddingEnd="@dimen/status_bar_left_clock_end_padding"
                     android:gravity="center_vertical|start"
                 />
-
-                <com.android.systemui.malluos.logo.LogoImageView
-                    android:id="@+id/malluos_logo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingEnd="1dip"
-                    android:scaleType="center"
-                    android:visibility="gone" />
 
                 <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
                     android:id="@+id/notification_icon_area"
