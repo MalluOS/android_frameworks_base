@@ -170,8 +170,7 @@ public class PreferencesHelper implements RankingConfig {
 
     private SparseBooleanArray mBadgingEnabled;
     private boolean mBubblesEnabledGlobally = DEFAULT_GLOBAL_ALLOW_BUBBLE;
-    private final boolean mIsMediaNotificationFilteringEnabled =
-            DEFAULT_MEDIA_NOTIFICATION_FILTERING;
+    private boolean mIsMediaNotificationFilteringEnabled = DEFAULT_MEDIA_NOTIFICATION_FILTERING;
     private boolean mAreChannelsBypassingDnd;
     private boolean mHideSilentStatusBarIcons = DEFAULT_HIDE_SILENT_STATUS_BAR_ICONS;
 
@@ -193,6 +192,7 @@ public class PreferencesHelper implements RankingConfig {
 
         updateBadgingEnabled();
         updateBubblesEnabled();
+        updateMediaNotificationFilteringEnabled();
         syncChannelsBypassingDnd(mContext.getUserId());
     }
 
@@ -2347,6 +2347,16 @@ public class PreferencesHelper implements RankingConfig {
 
     public boolean bubblesEnabled() {
         return mBubblesEnabledGlobally;
+    }
+
+    /** Requests check of the feature setting for showing media notifications in quick settings. */
+    public void updateMediaNotificationFilteringEnabled() {
+        final boolean newValue = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS, 1) > 0;
+        if (newValue != mIsMediaNotificationFilteringEnabled) {
+            mIsMediaNotificationFilteringEnabled = newValue;
+            updateConfig();
+        }
     }
 
     /** Returns true if the setting is enabled for showing media notifications in quick settings. */
