@@ -146,6 +146,7 @@ public class ScreenMediaRecorder {
                 mLegacyEncoderAllowed ? MediaCodecInfo.CodecProfileLevel.AVCLevel4
                 : MediaCodecInfo.CodecProfileLevel.AVCLevel42);
 
+                MediaCodecInfo.CodecProfileLevel.AVCLevel3);
         mMediaRecorder.setVideoSize(screenWidth, screenHeight);
         mMediaRecorder.setVideoFrameRate(refereshRate);
         mMediaRecorder.setVideoEncodingBitRate(vidBitRate);
