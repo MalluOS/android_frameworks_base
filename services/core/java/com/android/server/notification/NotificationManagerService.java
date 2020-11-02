@@ -8199,7 +8199,6 @@ public class NotificationManagerService extends SystemService {
             return;
         }
 
-        LedValues ledValues = new LedValues(light.color, light.onMs, light.offMs);
         int ledColor = light.color;
         if (isLedForcedOn(ledNotification) && ledColor == 0) {
             // User has requested color 0.  However, lineage-sdk interprets
